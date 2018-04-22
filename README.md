@@ -195,4 +195,4 @@ The following list provides further details you should be aware of:
 - [Failed Handshake Due to Broken Client Certificate Chain](./scenarios/Failed_Handshake_Due_to_Broken_Client_Certificate_Chain)
 - [Failed Handshake Due To Absence of Trust Anchor for Server Certificate](./scenarios/Failed_Handshake_Due_to_Absence_of_Trust_Anchor_for_Server_Certificate_Chain)
 - [Failed Handshake Due To Absence of Trust Anchor for Client Certificate](./scenarios/Failed_Handshake_Due_to_Absence_of_Trust_Anchor_for_Client_Certificate_Chain)
-- [Failed Handshake Due to CA Certificate with Inappropriate Extensions](./scenarios/Failed_Handshake_Due_to_Invalid_CA_Certificate)
+- [Failed Handshake Due to CA Certificate with Inappropriate Extensions](./scenarios/Failed_Handshake_Due_to_CA_Certificate_with_Inappropriate_Extensions)
