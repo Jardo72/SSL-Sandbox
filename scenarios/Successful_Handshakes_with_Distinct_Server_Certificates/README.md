@@ -1,0 +1,6 @@
+## Two Successful Handshakes, Each Using Distinct Server Certificate
+This scenario illustrates a setup when the server is equipped with two key pairs (and thus two certificates) - one RSA key pair and one DSA key pair. Cipher suites based on both key pairs are enabled for the server. Such a setup is sometimes used in order to ensure that the server will be able to accept incoming connections from clients using various key pair algorithms. There are two client configurations for this scenario - one enabling only cipher suites based on RSA, the other enabling only cipher suites based on DSA. Both configurations use the same client key-store, which contains two key pairs and the corresponding two certificates. The capture file involves two connections with successful handshake, each based on distinct client configuration. If you look at the handshake messages, you see that:
+
+- each of the two handshakes leads to a distinct cipher suite reflecting the capabilities of the client
+- each of the two handshakes uses distinct server certificate
+- the *ServerKeyExchange* message is absent for the session using RSA cipher suite, but it is present for the session using DHE/DSA cipher suite
