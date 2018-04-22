@@ -150,7 +150,7 @@ As you can see above, there are in fact two pairs of configurations - one using 
 By default, JDK implementations typically limit the encryption key size in accordance with the United States of America export restrictions. For instance, both Oracle and IBM JDKs do that. However, the ready-to-use configurations which are part of this project require unrestricted encryption key size. In order to use them, you need to download and install JCE Unlimited Strength Jurisdiction Policy Files. Look at the documentation of the JDK you use for instructions how to do that.
 
 ## Scenarios
-The [scenarios](./scenarios) directory contains ready-to-use configurations for various scenarios. There are configurations for successful as well as failed handshakes. For each of the scenarios, the following is provided:
+The [scenarios](/scenarios) directory contains ready-to-use configurations for various scenarios. There are configurations for successful as well as failed handshakes. For each of the scenarios, the following is provided:
 
 - pair of YAML configuration files, one for the client and one for the server
 - key-store(s) with key pair(s) and client/server certificate(s)
@@ -165,7 +165,7 @@ You have several options how to experiment with the SSL sandbox:
 
 The following list provides further details you should be aware of:
 
-- The [scenarios](./scenarios) directory contains a separate subdirectory for each of the scenarios. All files related to a single scenario are always concentrated within a single subdirectory.
+- The [scenarios](scenarios) directory contains a separate subdirectory for each of the scenarios. All files related to a single scenario are always concentrated within a single subdirectory.
 - There is a [CA_KeyStores](./scenarios/CA_KeyStores) subdirectory where you can find the CA key-stores (including the CA private keys). You can use these CAs to issue further certificates if you decide to arrange your own scenarios. The trust-stores contained in the subdirectories for particular scenarios contain only CA certificates (i.e. the private keys are not present there).
 - All key-stores and trust-stores are in JKS format.
 - All certificates which are supposed to be valid (i.e. certificates for scenarios which are not supposed to fail due to expired certificate) will be valid at least till February 2038.
