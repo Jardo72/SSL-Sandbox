@@ -166,7 +166,7 @@ You have several options how to experiment with the SSL sandbox:
 The following list provides further details you should be aware of:
 
 - The [scenarios](scenarios) directory contains a separate subdirectory for each of the scenarios. All files related to a single scenario are always concentrated within a single subdirectory.
-- There is a [CA_KeyStores](./scenarios/CA_KeyStores) subdirectory where you can find the CA key-stores (including the CA private keys). You can use these CAs to issue further certificates if you decide to arrange your own scenarios. The trust-stores contained in the subdirectories for particular scenarios contain only CA certificates (i.e. the private keys are not present there).
+- There is a [CA_KeyStores](./scenarios/CA_KeyStores/README.md) subdirectory where you can find the CA key-stores (including the CA private keys). You can use these CAs to issue further certificates if you decide to arrange your own scenarios. The trust-stores contained in the subdirectories for particular scenarios contain only CA certificates (i.e. the private keys are not present there).
 - All key-stores and trust-stores are in JKS format.
 - All certificates which are supposed to be valid (i.e. certificates for scenarios which are not supposed to fail due to expired certificate) will be valid at least till February 2038.
 - The password for each and every key-store/trust-store is always the same: `aardwark`.
@@ -177,10 +177,10 @@ The following list provides further details you should be aware of:
 
 ### Scenarios with Successful Handshake
 
-- [Successful Handshake without Client Authentication](./scenarios/Successful_Handshake_without_Client_Authentication)
-- [Successful Handshake with Client Authentication](./scenarios/Successful_Handshake_with_Client_Authentication)
-- [Successful Handshake with NULL Encryption](./scenarios/Successful_Handshake_with_NULL_Encryption)
-- [Two Successful Handshakes, Each Using Distinct Server Certificate](./scenarios/Successful_Handshake_with_Multiple_Keys)
+- [Successful Handshake without Client Authentication](scenarios/Successful_Handshake_without_Client_Authentication/README.md)
+- [Successful Handshake with Client Authentication](scenarios/Successful_Handshake_with_Client_Authentication/README.md)
+- [Successful Handshake with NULL Encryption](scenarios/Successful_Handshake_with_NULL_Encryption/README.md)
+- [Two Successful Handshakes, Each Using Distinct Server Certificate](scenarios/Successful_Handshake_with_Multiple_Keys/README.md)
 
 
 ### Scenarios with Failed Handshake
