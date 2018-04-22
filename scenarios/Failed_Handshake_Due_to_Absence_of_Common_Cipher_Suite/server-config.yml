@@ -1,0 +1,28 @@
+# IP address and TCP port the server has to bind to
+tcp:
+    address: 192.168.1.11
+    port: 1234
+
+# SSL/TLS settings like JSSE provider, enabled protocol
+# versions & cipher suites etc.
+ssl:
+    provider: BCJSSE
+    protocols:
+        - TLSv1.1
+        - TLSv1.2
+    cipher_suites:
+        - TLS_RSA_WITH_AES_128_GCM_SHA256
+        - TLS_RSA_WITH_AES_128_CBC_SHA256
+        - TLS_RSA_WITH_AES_128_CBC_SHA
+    use_client_authentication: false
+
+# properties of the key-store to be used by the server
+key_store:
+    path: server-key-store.jks
+    algorithm: JKS
+    password: aardwark
+
+# settings passed to KeyManagerFactory
+key_manager:
+    algorithm: PKIX
+    provider: BCJSSE
