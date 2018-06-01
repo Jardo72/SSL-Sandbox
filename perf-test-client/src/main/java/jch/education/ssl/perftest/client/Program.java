@@ -46,7 +46,7 @@ public class Program {
 
         try {
             List<IterationSummary> iterationSummaries = new LinkedList<>();
-            final int iterationCount = 10;
+            final int iterationCount = 100;
 
             long startTime = System.currentTimeMillis();
             for (int i = 1; i <= iterationCount; i++) {
@@ -111,7 +111,7 @@ public class Program {
                 byte[] singleMessage = messages.removeFirst();
                 outputStream.write(singleMessage);
 
-                if ((i % 500) == 0) {
+                if ((i % 1000) == 0) {
                     Stdout.traceln("Message %d/%d written to socket...", i, messageCount);
                 }
             }
