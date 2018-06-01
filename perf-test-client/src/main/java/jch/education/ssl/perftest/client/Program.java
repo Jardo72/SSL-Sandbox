@@ -145,7 +145,8 @@ public class Program {
         System.out.printf("Overall duration:         %d ms%n", testSummary.overallDurationMillis());
         System.out.printf("Iteration count:          %d%n", testSummary.iterationCount());
         System.out.printf("Overall message count:    %d%n", testSummary.overallMessageCount());
-        System.out.printf("Overall byte count:    %d%n", testSummary.overallByteCount());
+        System.out.printf("Overall byte count:       %d%n", testSummary.overallByteCount());
+        System.out.println();
         System.out.printf("Min. iteration duration:  %d ms%n", testSummary.minIterationDuration());
         System.out.printf("Max. iteration duration:  %d ms%n", testSummary.maxIterationDuration());
         System.out.printf("Avg. iteration duration:  %.1f ms%n", testSummary.averageIterationDuration());

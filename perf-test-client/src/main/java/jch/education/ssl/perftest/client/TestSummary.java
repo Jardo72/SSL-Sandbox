@@ -19,9 +19,9 @@ public class TestSummary {
         this.iterationsSummary = iterations.stream()
                 .collect(Collectors.summarizingLong(summary -> summary.durationMillis()));
         this.overallMessageCount = iterations.stream()
-                .collect(Collectors.summarizingInt(summary -> summary.overallMessageCount())).getCount();
+                .collect(Collectors.summarizingInt(summary -> summary.overallMessageCount())).getSum();
         this.overallByteCount = iterations.stream()
-                .collect(Collectors.summarizingLong(summary -> summary.overallByteCount())).getCount();
+                .collect(Collectors.summarizingLong(summary -> summary.overallByteCount())).getSum();
     }
 
     public long overallDurationMillis() {
