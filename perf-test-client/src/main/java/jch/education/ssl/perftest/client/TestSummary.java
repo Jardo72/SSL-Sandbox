@@ -8,16 +8,36 @@ public class TestSummary {
 
     private final long overallDurationMillis;
 
+    private final long overallMessageCount;
+
+    private final long overallByteCount;
+
     private final LongSummaryStatistics iterationsSummary;
 
     public TestSummary(long overallDurationMillis, List<IterationSummary> iterations) {
         this.overallDurationMillis = overallDurationMillis;
         this.iterationsSummary = iterations.stream()
                 .collect(Collectors.summarizingLong(summary -> summary.durationMillis()));
+        this.overallMessageCount = iterations.stream()
+                .collect(Collectors.summarizingInt(summary -> summary.overallMessageCount())).getCount();
+        this.overallByteCount = iterations.stream()
+                .collect(Collectors.summarizingLong(summary -> summary.overallByteCount())).getCount();
     }
 
     public long overallDurationMillis() {
         return this.overallDurationMillis;
+    }
+
+    public long iterationCount() {
+        return this.iterationsSummary.getCount();
+    }
+
+    public long overallMessageCount() {
+        return this.overallMessageCount;
+    }
+
+    public long overallByteCount() {
+        return this.overallByteCount;
     }
 
     public long minIterationDuration() {

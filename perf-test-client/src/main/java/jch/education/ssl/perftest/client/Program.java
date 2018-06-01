@@ -60,10 +60,7 @@ public class Program {
             long durationMillis = System.currentTimeMillis() - startTime;
 
             TestSummary testSummary = new TestSummary(durationMillis, iterationSummaries);
-            System.out.printf("Overall duration:         %d ms%n", testSummary.overallDurationMillis());
-            System.out.printf("Min. iteration duration:  %d ms%n", testSummary.minIterationDuration());
-            System.out.printf("Max. iteration duration:  %d ms%n", testSummary.maxIterationDuration());
-            System.out.printf("Avg. iteration duration:  %.1f ms%n", testSummary.averageIterationDuration());
+            print(testSummary);
         } finally {
             ResourceCleanupToolkit.close(socket);
         }
@@ -98,7 +95,7 @@ public class Program {
 
     private static IterationSummary sendAndReceiveMessages(Socket socket) throws Exception {
         final int messageSize = 25 * 1024;
-        final int messageCount = 50000;
+        final int messageCount = 40000;
 
         final LinkedList<byte[]> messages = createMessages(messageCount, messageSize);
         OutputStream outputStream = null;
@@ -142,5 +139,15 @@ public class Program {
             result.add(message);
         }
         return result;
+    }
+
+    private static void print(TestSummary testSummary) {
+        System.out.printf("Overall duration:         %d ms%n", testSummary.overallDurationMillis());
+        System.out.printf("Iteration count:          %d%n", testSummary.iterationCount());
+        System.out.printf("Overall message count:    %d%n", testSummary.overallMessageCount());
+        System.out.printf("Overall byte count:    %d%n", testSummary.overallByteCount());
+        System.out.printf("Min. iteration duration:  %d ms%n", testSummary.minIterationDuration());
+        System.out.printf("Max. iteration duration:  %d ms%n", testSummary.maxIterationDuration());
+        System.out.printf("Avg. iteration duration:  %.1f ms%n", testSummary.averageIterationDuration());
     }
 }
