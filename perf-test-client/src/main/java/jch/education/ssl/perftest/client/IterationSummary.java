@@ -2,24 +2,21 @@ package jch.education.ssl.perftest.client;
 
 public class IterationSummary {
 
-    private final int overallMessageCount;
-
-    private final long overallByteCount;
+    private final TestParameters testParameters;
 
     private final long durationMillis;
 
-    public IterationSummary(int overallMessageCount, long overallByteCount, long durationMillis) {
-        this.overallMessageCount = overallMessageCount;
-        this.overallByteCount = overallByteCount;
+    public IterationSummary(TestParameters testParameters, long durationMillis) {
+        this.testParameters = testParameters;
         this.durationMillis = durationMillis;
     }
 
     public int overallMessageCount() {
-        return this.overallMessageCount;
+        return this.testParameters.messagesPerConnection();
     }
 
     public long overallByteCount() {
-        return this.overallByteCount;
+        return this.testParameters.messagesPerConnection() * this.testParameters.messageSizeInBytes();
     }
 
     public long durationMillis() {

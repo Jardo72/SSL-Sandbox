@@ -71,7 +71,8 @@ public class ClientHandler implements Callable<Boolean> {
 
             return true;
         } catch (IOException e) {
-            Stdout.traceln("Going to close the socket...");
+            Stdout.traceln("Going to close the socket due to %s...", e.getClass().getName());
+            Stdout.traceln("Exception message is '%s'...", e.getMessage());
             SocketIO.closeImmediately(this.socket);
             throw e;
         }

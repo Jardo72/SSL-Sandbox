@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,43 +40,54 @@ import jch.education.ssl.commons.Stdout;
 public class Program {
 
     public static void main(String[] args) throws Exception {
-        SSLClientConfiguration clientConfig = readConfiguration(args);
+        SSLClientConfiguration clientConfig = readSSLConfiguration(args);
+        TestParameters testParameters = readTestParameters(args);
         final SSLContext sslContext = SSLContextFactory.createClientSSLContext(clientConfig);
 
         Socket socket = null;
 
         try {
             List<IterationSummary> iterationSummaries = new LinkedList<>();
-            final int iterationCount = 100;
+            final int iterationCount = 200;
 
             long startTime = System.currentTimeMillis();
-            for (int i = 1; i <= iterationCount; i++) {
+            for (int i = 1; i <= testParameters.connectionCount(); i++) {
                 socket = connectToServer(clientConfig, sslContext);
-                IterationSummary summary = sendAndReceiveMessages(socket);
+                IterationSummary summary = sendAndReceiveMessages(socket, testParameters);
                 iterationSummaries.add(summary);
                 Stdout.traceln("Iteration %d/%d: %d messages/%d bytes sent, duration = %d millis", i,
                         iterationCount, summary.overallMessageCount(), summary.overallByteCount(),
                         summary.durationMillis());
             }
-            long durationMillis = System.currentTimeMillis() - startTime;
+            TimeSpan timeSpan = new TimeSpan(startTime, System.currentTimeMillis());
 
-            TestSummary testSummary = new TestSummary(durationMillis, iterationSummaries);
+            TestSummary testSummary = new TestSummary(timeSpan, iterationSummaries);
             print(testSummary);
         } finally {
             ResourceCleanupToolkit.close(socket);
         }
     }
 
-    private static SSLClientConfiguration readConfiguration(String args[]) throws IOException {
-        if ((args == null) || (args.length == 0)) {
+    private static SSLClientConfiguration readSSLConfiguration(String args[]) throws IOException {
+        validateCommandLineArguments(args);
+        SSLClientConfiguration clientConfig = SSLClientConfiguration.fromFile(args[0]);
+        clientConfig.dumpTo(System.out);
+        return clientConfig;
+    }
+
+    private static TestParameters readTestParameters(String[] args) throws IOException {
+        validateCommandLineArguments(args);
+        TestParameters testParameters = TestParameters.fromFile(args[1]);
+        testParameters.dumpTo(System.out);
+        return testParameters;
+    }
+
+    private static void validateCommandLineArguments(String[] args) {
+        if ((args == null) || (args.length < 2)) {
             System.out.println("ERROR!!! Missing command line argument.");
             System.out.println("Single command line argument specifying client config. file is expected.");
             System.exit(1);
         }
-
-        SSLClientConfiguration clientConfig = SSLClientConfiguration.fromFile(args[0]);
-        clientConfig.dumpTo(System.out);
-        return clientConfig;
     }
 
     private static Socket connectToServer(SSLClientConfiguration config, SSLContext sslContext) throws Exception {
@@ -90,14 +102,14 @@ public class Program {
         Stdout.traceln("Connected to server, local endpoint %s...", socket.getLocalSocketAddress());
         Stdout.printSSLSession(socket.getSession());
 
+        // this prevents session caching, which would make the performance test useless
+        socket.getSession().invalidate();
+
         return socket;
     }
 
-    private static IterationSummary sendAndReceiveMessages(Socket socket) throws Exception {
-        final int messageSize = 25 * 1024;
-        final int messageCount = 40000;
-
-        final LinkedList<byte[]> messages = createMessages(messageCount, messageSize);
+    private static IterationSummary sendAndReceiveMessages(Socket socket, TestParameters testParameters) throws Exception {
+        final LinkedList<byte[]> messages = createMessages(testParameters);
         OutputStream outputStream = null;
         InputStream inputStream = null;
 
@@ -107,12 +119,12 @@ public class Program {
             Stdout.traceln("I/O streams obtained from the socket...");
 
             long startTime = System.currentTimeMillis();
-            for (int i = 1; i <= messageCount; i++) {
+            for (int i = 1; i <= testParameters.messagesPerConnection(); i++) {
                 byte[] singleMessage = messages.removeFirst();
                 outputStream.write(singleMessage);
 
                 if ((i % 1000) == 0) {
-                    Stdout.traceln("Message %d/%d written to socket...", i, messageCount);
+                    Stdout.traceln("Message %d/%d written to socket...", i, testParameters.messagesPerConnection());
                 }
             }
 
@@ -124,7 +136,7 @@ public class Program {
                 Stdout.traceln("ERROR!!! Remaining messages found (totally %d)...", messages.size());
             }
 
-            return new IterationSummary(messageCount, messageCount * messageSize, durationMillis);
+            return new IterationSummary(testParameters, durationMillis);
         } catch (IOException e) {
             Stdout.traceln("Going to close the connection...");
             SocketIO.closeImmediately(socket);
@@ -132,16 +144,19 @@ public class Program {
         }
     }
 
-    private static LinkedList<byte[]> createMessages(int messageCount, int messageSize) {
+    private static LinkedList<byte[]> createMessages(TestParameters testParameters) {
         LinkedList<byte[]> result = new LinkedList<>();
-        for (int i = 0; i < messageCount; i++) {
-            byte[] message = MessageFactory.createRandomBinaryMessage(messageSize);
+        for (int i = 0; i < testParameters.connectionCount(); i++) {
+            byte[] message = MessageFactory.createRandomBinaryMessage(testParameters.messageSizeInBytes());
             result.add(message);
         }
         return result;
     }
 
     private static void print(TestSummary testSummary) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+        System.out.printf("Start time:               %s%n", dateFormat.format(testSummary.startTime()));
+        System.out.printf("End time:                 %s%n", dateFormat.format(testSummary.endTime()));
         System.out.printf("Overall duration:         %d ms%n", testSummary.overallDurationMillis());
         System.out.printf("Iteration count:          %d%n", testSummary.iterationCount());
         System.out.printf("Overall message count:    %d%n", testSummary.overallMessageCount());
