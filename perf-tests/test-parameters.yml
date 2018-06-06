@@ -3,7 +3,7 @@
 connection_count: 200
 
 # number of messages to be sent over single connection
-messages_per_connection: 12000
+messages_per_connection: 5000
 
 # the size of a single message in bytes
 message_size_in_bytes: 1024
