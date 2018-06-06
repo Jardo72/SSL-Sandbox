@@ -50,7 +50,7 @@ public class Program {
 
             long startTime = System.currentTimeMillis();
             for (int i = 1; i <= testParams.connectionCount(); i++) {
-                socket = connectToServer(clientConfig, sslContext);
+                socket = connectToServer(clientConfig, testParams, sslContext);
                 IterationSummary summary = sendAndReceiveMessages(socket, testParams);
                 iterationSummaries.add(summary);
                 Stdout.traceln("Iteration %d/%d: %d messages/%d bytes sent, duration = %d millis", i,
@@ -91,7 +91,7 @@ public class Program {
         }
     }
 
-    private static Socket connectToServer(SSLClientConfiguration config, SSLContext sslContext) throws Exception {
+    private static Socket connectToServer(SSLClientConfiguration config, TestParameters testParams, SSLContext sslContext) throws Exception {
         SSLSocketFactory socketFactory = sslContext.getSocketFactory();
         SSLSocket socket = (SSLSocket) socketFactory.createSocket();
         socket.setEnabledProtocols(config.ssl().protocols());
@@ -103,9 +103,10 @@ public class Program {
         Stdout.traceln("Connected to server, local endpoint %s...", socket.getLocalSocketAddress());
         Stdout.printSSLSession(socket.getSession());
 
-        // TODO: do this only if requested by the configuration
-        // this prevents session caching, which would make the performance test useless
-        socket.getSession().invalidate();
+        if (testParams.disableSessionResumption()) {
+            // this prevents session caching, which would make the performance test useless
+            socket.getSession().invalidate();
+        }
 
         return socket;
     }
