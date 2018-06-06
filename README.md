@@ -7,7 +7,11 @@ SSL Sandbox is an educational/experimental project allowing to play around with:
 - SSL/TLS protocols
 - Java API related to SSL/TLS
 
-The project involves two console Java applications - dummy SSL server plus dummy SSL client. The client establishes a secure (i.e. SSL/TLS) connection to the server. Subsequently, several random messages are exchanged between the two endpoints. In order to get an idea about the internals of SSL/TLS, you can:
+The project involves two pairs of console Java applications:
+- Dummy SSL server plus dummy SSL client. The client establishes a secure (i.e. SSL/TLS) connection to the server. Subsequently, several random messages are exchanged between the two endpoints. This pair of applications is primarily meant to play around with the handshake.
+- Performance test SSL server plus SSL client. This pair of applications allows to measure the performance impact of various cipher suites and/or key sizes. The client establishes the prescribed number of connections, and each connection is used to send the given number of messages (the messages size is configurable as well). The connections are established sequentially, one after the termination of the other.
+
+In order to get an idea about the internals of SSL/TLS, you can use the first pair of the applications and:
 
 - Capture the network traffic between the client and the server and use [Wireshark](https://www.wireshark.org) to analyze it.
 - Activate the tracing for the SSL/TLS implementation you use and analyze the produced output. For instance, if you use Oracle Java and the default JSSE provider, use the `javax.net.debug` system property to do so.
@@ -41,25 +45,27 @@ Java Cryptography Architecture (JCA) is a pluggable architecture allowing applic
 
 
 ## Source Code Organization and Building
-The Java source code is organized as a multi-module Maven project consisting of three modules:
+The Java source code is organized as a multi-module Maven project consisting of five modules:
 
-- `commons` module provides reusable utilities common to both endpoints (i.e. client and server)
+- `commons` module provides reusable utilities common to all applications listed below
 - `client` module implements the dummy SSL client
 - `server` module implements the dummy SSL server
+- `perf-test-client` module implements the SSL client for performance testing
+- `perf-test-server` module implements the SSL server for performance testing
 
-In order to build the project, Java 8 (or higher) is needed. Parsing of the configuration in YAML format is based on [FasterXML/Jackson](https://github.com/FasterXML/jackson). In addition, both applications involve [Bouncy Castle](https://www.bouncycastle.org/java.html) crypto package, so that you are not limited to algorithms supported by the standard providers which are part of the JDK you use. Maven will automatically take care for the dependencies, so you do not have to do anything to make them available at compile-time. For client and server, Maven will also produce fat runnable JAR file containing all dependencies, so you do not have to care about the dependencies at run-time either.
+In order to build the project, Java 8 (or higher) is needed. Parsing of the configuration in YAML format is based on [FasterXML/Jackson](https://github.com/FasterXML/jackson). In addition, all applications involve [Bouncy Castle](https://www.bouncycastle.org/java.html) crypto package, so that you are not limited to algorithms supported by the standard providers which are part of the JDK you use. Maven will automatically take care for the dependencies, so you do not have to do anything to make them available at compile-time. For each of the four applications, Maven will also produce fat runnable JAR file containing all dependencies, so you do not have to care about the dependencies at run-time either.
 
-In order to build the client and the server, just navigate to the root directory of the project and execute the following command:
+In order to build the applications, just navigate to the root directory of the project and execute the following command:
 
 ```
 mvn clean package
 ```
 
-The command above will automatically build all three modules comprising the project. After successful build, there will be two runnable fat JAR files - one for the client and one for the server.
+The command above will automatically build all five modules comprising the project. After successful build, there will be four runnable fat JAR files, one for each of the four applications.
 
 
-## How to Start the Server and the Client
-As already mentioned above, there is a runnable fat JAR for the client as well as for the server. Therefore, it is very easy to start the two endpoints. The client as well as the server expects just a single command line argument, namely the name of the YAML configuration file to be used. The following snippet illustrates how to start the client and the server from the root directory of the project, using the minimal configurations present there:
+## How to Start the Dummy Server and the Client
+As already mentioned above, there is a runnable fat JAR for the dummy client as well as for the dummy server. Therefore, it is very easy to start the two endpoints. The client as well as the server expects just a single command line argument, namely the name of the YAML configuration file to be used. The following snippet illustrates how to start the client and the server from the root directory of the project, using the minimal configurations present there:
 
 ```
 # start the server (default provider, Sun in case of Oracle Java)
@@ -76,6 +82,20 @@ java -jar client/target/ssl-sandbox-client-0.1-jar-with-dependencies.jar client-
 ```
 
 Bouncy Castle provider is automatically registered at run-time. The registration does not affect the persistent configuration of your JRE, it only affects the process currently being executed (i.e. client or server).
+
+
+## How to Start the Server and the Client for Performance Testing
+As there are runnable fat JARs for the two performance-related applications as well, just use the same approach as described in the previous section of this document:
+
+```
+# start the server for performance testing
+java -jar perf-test-server/target/ssl-sandbox-perf-test-server-0.1-jar-with-dependencies.jar <server-config-file>
+
+# start the client for performance testing
+java -jar client/target/ssl-sandbox-perf-test-client-0.1-jar-with-dependencies.jar <client-config-file> <test-params-file>
+```
+
+Again, Bouncy Castle provider is automatically registered at run-time. Be aware of the fact that the client for performance testing requires one additional command line argument, namely the name of the configuration file prescribing the test parameters.
 
 
 ## Configuration
@@ -146,6 +166,8 @@ The root directory of the project contains some sort of minimal configurations. 
 
 As you can see above, there are in fact two pairs of configurations - one using the default JSSE provider (Sun provider in case of Oracle Java), and one using the Bouncy Castle provider.
 
+The above described structure of configuration file is also valid for the client and server meant for performance testing. Just be aware of the fact that when you want to measure performance, you typically want to do it for a particular cipher suite. Therefore, it is highly recommended to enable just a single cipher suite in the configuration files for performance testing. Such an approach can help you to avoid situations when you will accidentally test the performance of a cipher suite distinct from the one you actually wanted to measure.
+
 ## Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files
 By default, JDK implementations typically limit the encryption key size in accordance with the United States of America export restrictions. For instance, both Oracle and IBM JDKs do that. However, the ready-to-use configurations which are part of this project require unrestricted encryption key size. In order to use them, you need to download and install JCE Unlimited Strength Jurisdiction Policy Files. Look at the documentation of the JDK you use for instructions how to do that.
 
@@ -196,3 +218,7 @@ The following list provides further details you should be aware of:
 - [Failed Handshake Due To Absence of Trust Anchor for Server Certificate](./scenarios/Failed_Handshake_Due_to_Absence_of_Trust_Anchor_for_Server_Certificate_Chain)
 - [Failed Handshake Due To Absence of Trust Anchor for Client Certificate](./scenarios/Failed_Handshake_Due_to_Absence_of_Trust_Anchor_for_Client_Certificate_Chain)
 - [Failed Handshake Due to CA Certificate with Inappropriate Extensions](./scenarios/Failed_Handshake_Due_to_CA_Certificate_with_Inappropriate_Extensions)
+
+
+## Performance Testing
+The [perf-tests](./perf-tests) directory contains ready-to-use configurations for several performance tests. It also contains example of the configuration file with test parameters which is needed by the client. Be aware of the fact that you performance tests can address various aspects of the cipher suite. If you rather want to measure the impact of the key exchange and authentication aspects, specify rather a high number of connections (and thus enforce high number of handshakes to be established). On the other hand, if you rather want to measure the impact of the symmetric encryption and MAC, specify rather a high number of messages per connection, plus a high message size.
