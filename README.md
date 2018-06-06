@@ -9,7 +9,7 @@ SSL Sandbox is an educational/experimental project allowing to play around with:
 
 The project involves two pairs of console Java applications:
 - Dummy SSL server plus dummy SSL client. The client establishes a secure (i.e. SSL/TLS) connection to the server. Subsequently, several random messages are exchanged between the two endpoints. This pair of applications is primarily meant to play around with the handshake.
-- Performance test SSL server plus SSL client. This pair of applications allows to measure the performance impact of various cipher suites and/or key sizes. The client establishes the prescribed number of connections, and each connection is used to send the given number of messages (the messages size is configurable as well). The connections are established sequentially, one after the termination of the other.
+- Performance test SSL server plus SSL client. This pair of applications allows to measure the performance impact of various cipher suites and/or key sizes. The client establishes the prescribed number of connections, and each connection is used to send the given number of messages to the server (the messages size is configurable as well). The connections are established sequentially, one after the termination of its predecessor.
 
 In order to get an idea about the internals of SSL/TLS, you can use the first pair of the applications and:
 
@@ -95,7 +95,7 @@ java -jar perf-test-server/target/ssl-sandbox-perf-test-server-0.1-jar-with-depe
 java -jar client/target/ssl-sandbox-perf-test-client-0.1-jar-with-dependencies.jar <client-config-file> <test-params-file>
 ```
 
-Again, Bouncy Castle provider is automatically registered at run-time. Be aware of the fact that the client for performance testing requires one additional command line argument, namely the name of the configuration file prescribing the test parameters.
+Again, Bouncy Castle provider is automatically registered at run-time. Be aware of the fact that the client for performance testing requires one additional command line argument, namely the name of the configuration file prescribing the test parameters like the number of connections to be established.
 
 
 ## Configuration
@@ -221,4 +221,4 @@ The following list provides further details you should be aware of:
 
 
 ## Performance Testing
-The [perf-tests](./perf-tests) directory contains ready-to-use configurations for several performance tests. It also contains example of the configuration file with test parameters which is needed by the client. Be aware of the fact that performance tests can address various aspects of the cipher suite. If you rather want to measure the impact of the key exchange and authentication aspects, specify rather a high number of connections (and thus enforce high number of handshakes to be performed), and combine it with small number of messages per connection (even zero). On the other hand, if you rather want to measure the impact of the symmetric encryption and MAC, specify rather a high number of messages per connection, plus a high message size. This way, every connection will be forced to transfer (and encrypt/decrypt) a large amount of data. In the most extreme case, use just a single connection, but force it to transfer a large number of large messages.
+The [perf-tests](./perf-tests) directory contains ready-to-use configurations for several performance tests. It also contains example of the configuration file with test parameters which is needed by the client. Be aware of the fact that performance tests can address various aspects of the cipher suite. If you rather want to measure the impact of the key exchange and authentication aspects, specify rather a high number of connections (and thus enforce high number of handshakes to be performed), and combine it with small number of messages per connection (even zero). On the other hand, if you rather want to measure the impact of the symmetric encryption and MAC, specify rather a high number of messages per connection, plus a high message size. This way, every connection will be forced to transfer (and encrypt/decrypt) a large amount of data. In the most extreme case, use just a single connection, but force it to transfer a high number of large messages.
