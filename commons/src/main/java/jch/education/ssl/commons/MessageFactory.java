@@ -18,9 +18,12 @@
  */
 package jch.education.ssl.commons;
 
+import java.util.Random;
 import java.util.UUID;
 
 public class MessageFactory {
+
+    private static final Random random = new Random();
 
     private static final String CLIENT = "CLIENT";
 
@@ -42,5 +45,11 @@ public class MessageFactory {
 
     private static String createMessage(String sender, String recipient, int sequenceNumber) {
         return String.format("%s -> %s (seq-no %d): %s", sender, recipient, sequenceNumber, UUID.randomUUID());
+    }
+
+    public static byte[] createRandomBinaryMessage(int size) {
+        byte[] message = new byte[size];
+        random.nextBytes(message);
+        return message;
     }
 }

@@ -1,0 +1,25 @@
+# IP address and TCP port the server has to bind to
+tcp:
+    address: 192.168.1.11
+    port: 1234
+
+# SSL/TLS settings like JSSE provider, enabled protocol
+# versions & cipher suites etc.
+ssl:
+    protocols:
+        - TLSv1.2
+    cipher_suites:
+        - TLS_RSA_WITH_AES_256_GCM_SHA384
+    use_client_authentication: true
+
+# properties of the key-store to be used by the server
+key_store:
+    path: server-key-store.jks
+    algorithm: JKS
+    password: aardwark
+
+# properties of the trust-store to be used by the server
+trust_store:
+    path: trust-store.jks
+    algorithm: JKS
+    password: aardwark

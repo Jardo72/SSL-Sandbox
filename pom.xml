@@ -32,6 +32,8 @@
     <module>commons</module>
     <module>client</module>
     <module>server</module>
+    <module>perf-test-client</module>
+    <module>perf-test-server</module>
   </modules>
 
   <properties>

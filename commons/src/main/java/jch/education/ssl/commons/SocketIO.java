@@ -20,7 +20,9 @@ package jch.education.ssl.commons;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -43,6 +45,12 @@ public class SocketIO {
         ResourceCleanupToolkit.close(reader);
     }
 
+    public static void closeCooperatively(OutputStream outputStream, InputStream inputStream) {
+        ResourceCleanupToolkit.close(outputStream);
+        waitForEndOfStream(inputStream);
+        ResourceCleanupToolkit.close(inputStream);
+    }
+
     public static void closeImmediately(Socket socket) {
         ResourceCleanupToolkit.close(socket);
     }
@@ -50,6 +58,12 @@ public class SocketIO {
     private static void waitForEndOfStream(BufferedReader reader) {
         try {
             while (reader.readLine() != null) {}
+        } catch (IOException ignore) {}
+    }
+
+    private static void waitForEndOfStream(InputStream inputStream) {
+        try {
+            while (inputStream.read() != -1) {}
         } catch (IOException ignore) {}
     }
 }
