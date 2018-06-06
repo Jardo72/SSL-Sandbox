@@ -7,7 +7,7 @@ SSL Sandbox is an educational/experimental project allowing to play around with:
 - SSL/TLS protocols
 - Java API related to SSL/TLS
 
-The project involves two console Java applications - dummy SSL server plus dummy SSL client. The the client establishes a secure (i.e. SSL/TLS) connection to the server. Subsequently, several random messages are exchanged between the two endpoints. In order to get an idea about the internals of SSL/TLS, you can:
+The project involves two console Java applications - dummy SSL server plus dummy SSL client. The client establishes a secure (i.e. SSL/TLS) connection to the server. Subsequently, several random messages are exchanged between the two endpoints. In order to get an idea about the internals of SSL/TLS, you can:
 
 - Capture the network traffic between the client and the server and use [Wireshark](https://www.wireshark.org) to analyze it.
 - Activate the tracing for the SSL/TLS implementation you use and analyze the produced output. For instance, if you use Oracle Java and the default JSSE provider, use the `javax.net.debug` system property to do so.
@@ -171,7 +171,7 @@ The following list provides further details you should be aware of:
 - All certificates which are supposed to be valid (i.e. certificates for scenarios which are not supposed to fail due to expired certificate) will be valid at least till February 2038.
 - The password for each and every key-store/trust-store is always the same: `aardwark`.
 - The same password is used for any key-store/trust-store entry.
-- In each of the the provided capture files, the IP address 192.168.1.11 corresponds to the server, and the IP address 192.168.1.15 corresponds to the client.
+- In each of the provided capture files, the IP address 192.168.1.11 corresponds to the server, and the IP address 192.168.1.15 corresponds to the client.
 - All provided YAML configuration files contain the IP address 192.168.1.11, which is likely to deviate from your environment. In practical terms, it is very likely that you have to change this if you want to reproduce the scenarios yourself.
 - For some of the scenarios, there are two versions of client or server configuration. In such a case, one variant of the configuration uses the default JSSE provider, whereas the other uses Bouncy Castle provider. For such scenarios, there are either two capture files, or the single capture file involves two SSL sessions, each based a distinct configuration variant.
 

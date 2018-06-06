@@ -9,7 +9,7 @@ ssl:
     protocols:
         - TLSv1.2
     cipher_suites:
-        - TLS_RSA_WITH_AES_128_GCM_SHA
+        - TLS_RSA_WITH_AES_128_CBC_SHA
     use_client_authentication: true
 
 # properties of the key-store to be used by the server

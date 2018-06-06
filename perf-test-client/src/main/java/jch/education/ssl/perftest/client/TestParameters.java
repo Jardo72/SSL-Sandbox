@@ -22,20 +22,25 @@ public class TestParameters {
     @JsonProperty(value = "disable_session_resumption", defaultValue = "true")
     private boolean disableSessionResumption;
 
+    private String configFile;
+
     private TestParameters() {}
 
     public static TestParameters fromFile(String path) throws IOException {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         TestParameters result = mapper.readValue(new File(path), TestParameters.class);
+        result.configFile = path;
         return result;
     }
 
     public void dumpTo(PrintStream out) {
         out.println();
         out.println("Test parameters -------------------------------------");
+        out.printf("Configuration file:      %s%n", this.configFile);
         out.printf("Number of connections:   %d%n", this.connectionCount);
         out.printf("Messages per connection: %d%n", this.messagesPerConnection);
         out.printf("Message size [bytes]:    %d%n", this.messageSizeInBytes);
+        out.printf("Session resumption:      %s%n", sessionResumptionStatus());
         out.println("-----------------------------------------------------");
         out.println();
     }
@@ -54,5 +59,12 @@ public class TestParameters {
 
     public boolean disableSessionResumption() {
         return this.disableSessionResumption;
+    }
+
+    private String sessionResumptionStatus() {
+        if (this.disableSessionResumption) {
+            return "DISABLED";
+        }
+        return "ENABLED";
     }
 }

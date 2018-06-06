@@ -63,7 +63,7 @@ abstract class AbstractConfiguration {
 
     public void dumpTo(PrintStream out) {
         out.println();
-        out.println("Configuration ---------------------------------------");
+        out.println("SSL Configuration -----------------------------------");
         out.printf("Configuration file:    %s%n", this.configFile);
         out.println();
 

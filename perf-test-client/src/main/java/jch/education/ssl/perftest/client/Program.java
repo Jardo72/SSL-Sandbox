@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,28 +40,28 @@ public class Program {
 
     public static void main(String[] args) throws Exception {
         SSLClientConfiguration clientConfig = readSSLConfiguration(args);
-        TestParameters testParameters = readTestParameters(args);
+        TestParameters testParams = readTestParameters(args);
         final SSLContext sslContext = SSLContextFactory.createClientSSLContext(clientConfig);
 
         Socket socket = null;
 
         try {
             List<IterationSummary> iterationSummaries = new LinkedList<>();
-            final int iterationCount = 200;
 
             long startTime = System.currentTimeMillis();
-            for (int i = 1; i <= testParameters.connectionCount(); i++) {
+            for (int i = 1; i <= testParams.connectionCount(); i++) {
                 socket = connectToServer(clientConfig, sslContext);
-                IterationSummary summary = sendAndReceiveMessages(socket, testParameters);
+                IterationSummary summary = sendAndReceiveMessages(socket, testParams);
                 iterationSummaries.add(summary);
                 Stdout.traceln("Iteration %d/%d: %d messages/%d bytes sent, duration = %d millis", i,
-                        iterationCount, summary.overallMessageCount(), summary.overallByteCount(),
-                        summary.durationMillis());
+                        testParams.connectionCount(), summary.overallMessageCount(),
+                        summary.overallByteCount(), summary.durationMillis());
             }
             TimeSpan timeSpan = new TimeSpan(startTime, System.currentTimeMillis());
-
             TestSummary testSummary = new TestSummary(timeSpan, iterationSummaries);
-            print(testSummary);
+
+            String reportFile = TestReport.write(clientConfig, testParams, testSummary);
+            Stdout.traceln("Test report written to file %s", reportFile);
         } finally {
             ResourceCleanupToolkit.close(socket);
         }
@@ -84,8 +83,10 @@ public class Program {
 
     private static void validateCommandLineArguments(String[] args) {
         if ((args == null) || (args.length < 2)) {
-            System.out.println("ERROR!!! Missing command line argument.");
-            System.out.println("Single command line argument specifying client config. file is expected.");
+            System.out.println("ERROR!!! Missing command line argument(s).");
+            System.out.println("Two command line arguments are expected, specifying:");
+            System.out.println("- client config. file");
+            System.out.println("- test parameters file");
             System.exit(1);
         }
     }
@@ -102,6 +103,7 @@ public class Program {
         Stdout.traceln("Connected to server, local endpoint %s...", socket.getLocalSocketAddress());
         Stdout.printSSLSession(socket.getSession());
 
+        // TODO: do this only if requested by the configuration
         // this prevents session caching, which would make the performance test useless
         socket.getSession().invalidate();
 
@@ -146,24 +148,10 @@ public class Program {
 
     private static LinkedList<byte[]> createMessages(TestParameters testParameters) {
         LinkedList<byte[]> result = new LinkedList<>();
-        for (int i = 0; i < testParameters.connectionCount(); i++) {
+        for (int i = 0; i < testParameters.messagesPerConnection(); i++) {
             byte[] message = MessageFactory.createRandomBinaryMessage(testParameters.messageSizeInBytes());
             result.add(message);
         }
         return result;
-    }
-
-    private static void print(TestSummary testSummary) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-        System.out.printf("Start time:               %s%n", dateFormat.format(testSummary.startTime()));
-        System.out.printf("End time:                 %s%n", dateFormat.format(testSummary.endTime()));
-        System.out.printf("Overall duration:         %d ms%n", testSummary.overallDurationMillis());
-        System.out.printf("Iteration count:          %d%n", testSummary.iterationCount());
-        System.out.printf("Overall message count:    %d%n", testSummary.overallMessageCount());
-        System.out.printf("Overall byte count:       %d%n", testSummary.overallByteCount());
-        System.out.println();
-        System.out.printf("Min. iteration duration:  %d ms%n", testSummary.minIterationDuration());
-        System.out.printf("Max. iteration duration:  %d ms%n", testSummary.maxIterationDuration());
-        System.out.printf("Avg. iteration duration:  %.1f ms%n", testSummary.averageIterationDuration());
     }
 }
