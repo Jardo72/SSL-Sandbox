@@ -1,0 +1,240 @@
+
+SSL Configuration -----------------------------------
+Configuration file:    TLS_RSA_2048_WITH_AES_256_GCM_SHA384\client-config-sun.yml
+
+IP address:            192.168.1.11
+Port:                  1234
+Protocols:
+- TLSv1.2
+Cipher suites:
+- TLS_RSA_WITH_AES_256_GCM_SHA384
+Client authentication: true
+-----------------------------------------------------
+
+
+Test parameters -------------------------------------
+Configuration file:      test-parameters.yml
+Number of connections:   200
+Messages per connection: 5000
+Message size [bytes]:    1024
+Session resumption:      DISABLED
+-----------------------------------------------------
+
+
+Test summary ----------------------------------------
+Start time:               06.06.2018 13:50:28
+End time:                 06.06.2018 14:26:37
+Overall duration:         2168923 ms
+Iteration count:          200
+Overall message count:    1000000
+Overall byte count:       1024000000
+
+Min. iteration duration:  8914 ms
+Max. iteration duration:  15729 ms
+Avg. iteration duration:  10744.7 ms
+-----------------------------------------------------
+
+
+Test iterations -------------------------------------
+Iteration 1/200: 5000 messages/5120000 bytes sent, duration = 10247 millis
+Iteration 2/200: 5000 messages/5120000 bytes sent, duration = 9679 millis
+Iteration 3/200: 5000 messages/5120000 bytes sent, duration = 10541 millis
+Iteration 4/200: 5000 messages/5120000 bytes sent, duration = 9333 millis
+Iteration 5/200: 5000 messages/5120000 bytes sent, duration = 9508 millis
+Iteration 6/200: 5000 messages/5120000 bytes sent, duration = 11713 millis
+Iteration 7/200: 5000 messages/5120000 bytes sent, duration = 11618 millis
+Iteration 8/200: 5000 messages/5120000 bytes sent, duration = 11419 millis
+Iteration 9/200: 5000 messages/5120000 bytes sent, duration = 10830 millis
+Iteration 10/200: 5000 messages/5120000 bytes sent, duration = 9939 millis
+Iteration 11/200: 5000 messages/5120000 bytes sent, duration = 10824 millis
+Iteration 12/200: 5000 messages/5120000 bytes sent, duration = 11793 millis
+Iteration 13/200: 5000 messages/5120000 bytes sent, duration = 8919 millis
+Iteration 14/200: 5000 messages/5120000 bytes sent, duration = 11503 millis
+Iteration 15/200: 5000 messages/5120000 bytes sent, duration = 10985 millis
+Iteration 16/200: 5000 messages/5120000 bytes sent, duration = 11508 millis
+Iteration 17/200: 5000 messages/5120000 bytes sent, duration = 9794 millis
+Iteration 18/200: 5000 messages/5120000 bytes sent, duration = 11467 millis
+Iteration 19/200: 5000 messages/5120000 bytes sent, duration = 11850 millis
+Iteration 20/200: 5000 messages/5120000 bytes sent, duration = 11136 millis
+Iteration 21/200: 5000 messages/5120000 bytes sent, duration = 10473 millis
+Iteration 22/200: 5000 messages/5120000 bytes sent, duration = 11135 millis
+Iteration 23/200: 5000 messages/5120000 bytes sent, duration = 11281 millis
+Iteration 24/200: 5000 messages/5120000 bytes sent, duration = 11339 millis
+Iteration 25/200: 5000 messages/5120000 bytes sent, duration = 10522 millis
+Iteration 26/200: 5000 messages/5120000 bytes sent, duration = 10680 millis
+Iteration 27/200: 5000 messages/5120000 bytes sent, duration = 10249 millis
+Iteration 28/200: 5000 messages/5120000 bytes sent, duration = 11901 millis
+Iteration 29/200: 5000 messages/5120000 bytes sent, duration = 11140 millis
+Iteration 30/200: 5000 messages/5120000 bytes sent, duration = 10611 millis
+Iteration 31/200: 5000 messages/5120000 bytes sent, duration = 10284 millis
+Iteration 32/200: 5000 messages/5120000 bytes sent, duration = 10309 millis
+Iteration 33/200: 5000 messages/5120000 bytes sent, duration = 11206 millis
+Iteration 34/200: 5000 messages/5120000 bytes sent, duration = 10402 millis
+Iteration 35/200: 5000 messages/5120000 bytes sent, duration = 9879 millis
+Iteration 36/200: 5000 messages/5120000 bytes sent, duration = 10152 millis
+Iteration 37/200: 5000 messages/5120000 bytes sent, duration = 9703 millis
+Iteration 38/200: 5000 messages/5120000 bytes sent, duration = 10578 millis
+Iteration 39/200: 5000 messages/5120000 bytes sent, duration = 11369 millis
+Iteration 40/200: 5000 messages/5120000 bytes sent, duration = 9890 millis
+Iteration 41/200: 5000 messages/5120000 bytes sent, duration = 9636 millis
+Iteration 42/200: 5000 messages/5120000 bytes sent, duration = 11432 millis
+Iteration 43/200: 5000 messages/5120000 bytes sent, duration = 10042 millis
+Iteration 44/200: 5000 messages/5120000 bytes sent, duration = 11200 millis
+Iteration 45/200: 5000 messages/5120000 bytes sent, duration = 10373 millis
+Iteration 46/200: 5000 messages/5120000 bytes sent, duration = 10123 millis
+Iteration 47/200: 5000 messages/5120000 bytes sent, duration = 10101 millis
+Iteration 48/200: 5000 messages/5120000 bytes sent, duration = 10814 millis
+Iteration 49/200: 5000 messages/5120000 bytes sent, duration = 11283 millis
+Iteration 50/200: 5000 messages/5120000 bytes sent, duration = 15729 millis
+Iteration 51/200: 5000 messages/5120000 bytes sent, duration = 11322 millis
+Iteration 52/200: 5000 messages/5120000 bytes sent, duration = 11160 millis
+Iteration 53/200: 5000 messages/5120000 bytes sent, duration = 12488 millis
+Iteration 54/200: 5000 messages/5120000 bytes sent, duration = 10003 millis
+Iteration 55/200: 5000 messages/5120000 bytes sent, duration = 11981 millis
+Iteration 56/200: 5000 messages/5120000 bytes sent, duration = 10031 millis
+Iteration 57/200: 5000 messages/5120000 bytes sent, duration = 10534 millis
+Iteration 58/200: 5000 messages/5120000 bytes sent, duration = 10280 millis
+Iteration 59/200: 5000 messages/5120000 bytes sent, duration = 11080 millis
+Iteration 60/200: 5000 messages/5120000 bytes sent, duration = 9104 millis
+Iteration 61/200: 5000 messages/5120000 bytes sent, duration = 10750 millis
+Iteration 62/200: 5000 messages/5120000 bytes sent, duration = 11987 millis
+Iteration 63/200: 5000 messages/5120000 bytes sent, duration = 11653 millis
+Iteration 64/200: 5000 messages/5120000 bytes sent, duration = 11788 millis
+Iteration 65/200: 5000 messages/5120000 bytes sent, duration = 9663 millis
+Iteration 66/200: 5000 messages/5120000 bytes sent, duration = 11277 millis
+Iteration 67/200: 5000 messages/5120000 bytes sent, duration = 10568 millis
+Iteration 68/200: 5000 messages/5120000 bytes sent, duration = 10408 millis
+Iteration 69/200: 5000 messages/5120000 bytes sent, duration = 10363 millis
+Iteration 70/200: 5000 messages/5120000 bytes sent, duration = 10293 millis
+Iteration 71/200: 5000 messages/5120000 bytes sent, duration = 10478 millis
+Iteration 72/200: 5000 messages/5120000 bytes sent, duration = 10313 millis
+Iteration 73/200: 5000 messages/5120000 bytes sent, duration = 10539 millis
+Iteration 74/200: 5000 messages/5120000 bytes sent, duration = 10127 millis
+Iteration 75/200: 5000 messages/5120000 bytes sent, duration = 10901 millis
+Iteration 76/200: 5000 messages/5120000 bytes sent, duration = 10377 millis
+Iteration 77/200: 5000 messages/5120000 bytes sent, duration = 9734 millis
+Iteration 78/200: 5000 messages/5120000 bytes sent, duration = 11322 millis
+Iteration 79/200: 5000 messages/5120000 bytes sent, duration = 11317 millis
+Iteration 80/200: 5000 messages/5120000 bytes sent, duration = 8914 millis
+Iteration 81/200: 5000 messages/5120000 bytes sent, duration = 11098 millis
+Iteration 82/200: 5000 messages/5120000 bytes sent, duration = 10448 millis
+Iteration 83/200: 5000 messages/5120000 bytes sent, duration = 9780 millis
+Iteration 84/200: 5000 messages/5120000 bytes sent, duration = 11040 millis
+Iteration 85/200: 5000 messages/5120000 bytes sent, duration = 9098 millis
+Iteration 86/200: 5000 messages/5120000 bytes sent, duration = 10688 millis
+Iteration 87/200: 5000 messages/5120000 bytes sent, duration = 11606 millis
+Iteration 88/200: 5000 messages/5120000 bytes sent, duration = 11802 millis
+Iteration 89/200: 5000 messages/5120000 bytes sent, duration = 10477 millis
+Iteration 90/200: 5000 messages/5120000 bytes sent, duration = 11548 millis
+Iteration 91/200: 5000 messages/5120000 bytes sent, duration = 10575 millis
+Iteration 92/200: 5000 messages/5120000 bytes sent, duration = 11743 millis
+Iteration 93/200: 5000 messages/5120000 bytes sent, duration = 11777 millis
+Iteration 94/200: 5000 messages/5120000 bytes sent, duration = 10617 millis
+Iteration 95/200: 5000 messages/5120000 bytes sent, duration = 10785 millis
+Iteration 96/200: 5000 messages/5120000 bytes sent, duration = 10892 millis
+Iteration 97/200: 5000 messages/5120000 bytes sent, duration = 10284 millis
+Iteration 98/200: 5000 messages/5120000 bytes sent, duration = 10746 millis
+Iteration 99/200: 5000 messages/5120000 bytes sent, duration = 11716 millis
+Iteration 100/200: 5000 messages/5120000 bytes sent, duration = 10978 millis
+Iteration 101/200: 5000 messages/5120000 bytes sent, duration = 9322 millis
+Iteration 102/200: 5000 messages/5120000 bytes sent, duration = 10323 millis
+Iteration 103/200: 5000 messages/5120000 bytes sent, duration = 10742 millis
+Iteration 104/200: 5000 messages/5120000 bytes sent, duration = 10152 millis
+Iteration 105/200: 5000 messages/5120000 bytes sent, duration = 11385 millis
+Iteration 106/200: 5000 messages/5120000 bytes sent, duration = 10638 millis
+Iteration 107/200: 5000 messages/5120000 bytes sent, duration = 10289 millis
+Iteration 108/200: 5000 messages/5120000 bytes sent, duration = 9840 millis
+Iteration 109/200: 5000 messages/5120000 bytes sent, duration = 9701 millis
+Iteration 110/200: 5000 messages/5120000 bytes sent, duration = 9742 millis
+Iteration 111/200: 5000 messages/5120000 bytes sent, duration = 10302 millis
+Iteration 112/200: 5000 messages/5120000 bytes sent, duration = 10930 millis
+Iteration 113/200: 5000 messages/5120000 bytes sent, duration = 10317 millis
+Iteration 114/200: 5000 messages/5120000 bytes sent, duration = 9677 millis
+Iteration 115/200: 5000 messages/5120000 bytes sent, duration = 10535 millis
+Iteration 116/200: 5000 messages/5120000 bytes sent, duration = 10900 millis
+Iteration 117/200: 5000 messages/5120000 bytes sent, duration = 10857 millis
+Iteration 118/200: 5000 messages/5120000 bytes sent, duration = 10960 millis
+Iteration 119/200: 5000 messages/5120000 bytes sent, duration = 11605 millis
+Iteration 120/200: 5000 messages/5120000 bytes sent, duration = 11371 millis
+Iteration 121/200: 5000 messages/5120000 bytes sent, duration = 10101 millis
+Iteration 122/200: 5000 messages/5120000 bytes sent, duration = 10489 millis
+Iteration 123/200: 5000 messages/5120000 bytes sent, duration = 9638 millis
+Iteration 124/200: 5000 messages/5120000 bytes sent, duration = 11156 millis
+Iteration 125/200: 5000 messages/5120000 bytes sent, duration = 10934 millis
+Iteration 126/200: 5000 messages/5120000 bytes sent, duration = 10625 millis
+Iteration 127/200: 5000 messages/5120000 bytes sent, duration = 10325 millis
+Iteration 128/200: 5000 messages/5120000 bytes sent, duration = 10269 millis
+Iteration 129/200: 5000 messages/5120000 bytes sent, duration = 10187 millis
+Iteration 130/200: 5000 messages/5120000 bytes sent, duration = 9557 millis
+Iteration 131/200: 5000 messages/5120000 bytes sent, duration = 10811 millis
+Iteration 132/200: 5000 messages/5120000 bytes sent, duration = 11751 millis
+Iteration 133/200: 5000 messages/5120000 bytes sent, duration = 11424 millis
+Iteration 134/200: 5000 messages/5120000 bytes sent, duration = 11184 millis
+Iteration 135/200: 5000 messages/5120000 bytes sent, duration = 11180 millis
+Iteration 136/200: 5000 messages/5120000 bytes sent, duration = 10885 millis
+Iteration 137/200: 5000 messages/5120000 bytes sent, duration = 11502 millis
+Iteration 138/200: 5000 messages/5120000 bytes sent, duration = 10526 millis
+Iteration 139/200: 5000 messages/5120000 bytes sent, duration = 12112 millis
+Iteration 140/200: 5000 messages/5120000 bytes sent, duration = 11313 millis
+Iteration 141/200: 5000 messages/5120000 bytes sent, duration = 10993 millis
+Iteration 142/200: 5000 messages/5120000 bytes sent, duration = 10980 millis
+Iteration 143/200: 5000 messages/5120000 bytes sent, duration = 11289 millis
+Iteration 144/200: 5000 messages/5120000 bytes sent, duration = 9977 millis
+Iteration 145/200: 5000 messages/5120000 bytes sent, duration = 11105 millis
+Iteration 146/200: 5000 messages/5120000 bytes sent, duration = 11986 millis
+Iteration 147/200: 5000 messages/5120000 bytes sent, duration = 11047 millis
+Iteration 148/200: 5000 messages/5120000 bytes sent, duration = 9585 millis
+Iteration 149/200: 5000 messages/5120000 bytes sent, duration = 11097 millis
+Iteration 150/200: 5000 messages/5120000 bytes sent, duration = 9573 millis
+Iteration 151/200: 5000 messages/5120000 bytes sent, duration = 10567 millis
+Iteration 152/200: 5000 messages/5120000 bytes sent, duration = 10309 millis
+Iteration 153/200: 5000 messages/5120000 bytes sent, duration = 9181 millis
+Iteration 154/200: 5000 messages/5120000 bytes sent, duration = 10217 millis
+Iteration 155/200: 5000 messages/5120000 bytes sent, duration = 11432 millis
+Iteration 156/200: 5000 messages/5120000 bytes sent, duration = 11261 millis
+Iteration 157/200: 5000 messages/5120000 bytes sent, duration = 10515 millis
+Iteration 158/200: 5000 messages/5120000 bytes sent, duration = 11372 millis
+Iteration 159/200: 5000 messages/5120000 bytes sent, duration = 9675 millis
+Iteration 160/200: 5000 messages/5120000 bytes sent, duration = 11010 millis
+Iteration 161/200: 5000 messages/5120000 bytes sent, duration = 10445 millis
+Iteration 162/200: 5000 messages/5120000 bytes sent, duration = 11814 millis
+Iteration 163/200: 5000 messages/5120000 bytes sent, duration = 10257 millis
+Iteration 164/200: 5000 messages/5120000 bytes sent, duration = 10134 millis
+Iteration 165/200: 5000 messages/5120000 bytes sent, duration = 9513 millis
+Iteration 166/200: 5000 messages/5120000 bytes sent, duration = 11983 millis
+Iteration 167/200: 5000 messages/5120000 bytes sent, duration = 10226 millis
+Iteration 168/200: 5000 messages/5120000 bytes sent, duration = 10650 millis
+Iteration 169/200: 5000 messages/5120000 bytes sent, duration = 11714 millis
+Iteration 170/200: 5000 messages/5120000 bytes sent, duration = 10757 millis
+Iteration 171/200: 5000 messages/5120000 bytes sent, duration = 9460 millis
+Iteration 172/200: 5000 messages/5120000 bytes sent, duration = 10159 millis
+Iteration 173/200: 5000 messages/5120000 bytes sent, duration = 11213 millis
+Iteration 174/200: 5000 messages/5120000 bytes sent, duration = 11053 millis
+Iteration 175/200: 5000 messages/5120000 bytes sent, duration = 10765 millis
+Iteration 176/200: 5000 messages/5120000 bytes sent, duration = 11402 millis
+Iteration 177/200: 5000 messages/5120000 bytes sent, duration = 10218 millis
+Iteration 178/200: 5000 messages/5120000 bytes sent, duration = 10778 millis
+Iteration 179/200: 5000 messages/5120000 bytes sent, duration = 9932 millis
+Iteration 180/200: 5000 messages/5120000 bytes sent, duration = 9763 millis
+Iteration 181/200: 5000 messages/5120000 bytes sent, duration = 10647 millis
+Iteration 182/200: 5000 messages/5120000 bytes sent, duration = 11776 millis
+Iteration 183/200: 5000 messages/5120000 bytes sent, duration = 10824 millis
+Iteration 184/200: 5000 messages/5120000 bytes sent, duration = 10115 millis
+Iteration 185/200: 5000 messages/5120000 bytes sent, duration = 11719 millis
+Iteration 186/200: 5000 messages/5120000 bytes sent, duration = 11812 millis
+Iteration 187/200: 5000 messages/5120000 bytes sent, duration = 10353 millis
+Iteration 188/200: 5000 messages/5120000 bytes sent, duration = 10823 millis
+Iteration 189/200: 5000 messages/5120000 bytes sent, duration = 11339 millis
+Iteration 190/200: 5000 messages/5120000 bytes sent, duration = 10833 millis
+Iteration 191/200: 5000 messages/5120000 bytes sent, duration = 11609 millis
+Iteration 192/200: 5000 messages/5120000 bytes sent, duration = 12000 millis
+Iteration 193/200: 5000 messages/5120000 bytes sent, duration = 11308 millis
+Iteration 194/200: 5000 messages/5120000 bytes sent, duration = 11136 millis
+Iteration 195/200: 5000 messages/5120000 bytes sent, duration = 12136 millis
+Iteration 196/200: 5000 messages/5120000 bytes sent, duration = 9939 millis
+Iteration 197/200: 5000 messages/5120000 bytes sent, duration = 10686 millis
+Iteration 198/200: 5000 messages/5120000 bytes sent, duration = 10041 millis
+Iteration 199/200: 5000 messages/5120000 bytes sent, duration = 11065 millis
+Iteration 200/200: 5000 messages/5120000 bytes sent, duration = 10912 millis
+-----------------------------------------------------
+
